@@ -15,8 +15,9 @@ class AppService {
     func fetchApps(searchTerm: String, completion: @escaping ([Result], Error?) -> ()) {
         print("Fetching iTunes apps from Service layer")
         
-        let urlString  = "https://itunes.apple.com/search?term=\(searchTerm)&entity=movie"
+        let urlString  = "https://itunes.apple.com/search?term=\(searchTerm)&entity=software"
         guard let url = URL(string: urlString) else { return }
+        print(url)
         
         // fetch data from internet
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -40,8 +41,23 @@ class AppService {
             }.resume() // fires off the request
     }
     
+    func fetchTopGrossing(completion: @escaping (AppGroup?, Error?) -> ()) {
+        
+        fetchAppGroup(urlString: "https://rss.itunes.apple.com/api/v1/us/ios-apps/top-grossing/all/50/explicit.json", completion: completion)
+    }
+    
     func fetchGames(completion: @escaping (AppGroup?, Error?) -> ()) {
-        guard let url = URL(string: "https://rss.itunes.apple.com/api/v1/us/ios-apps/new-games-we-love/all/50/explicit.json") else { return }
+        
+        fetchAppGroup(urlString: "https://rss.itunes.apple.com/api/v1/us/ios-apps/new-games-we-love/all/50/explicit.json", completion: completion)
+    }
+    
+    func fetchTopFree(completion: @escaping (AppGroup?, Error?) -> ()) {
+        
+        fetchAppGroup(urlString: "https://rss.itunes.apple.com/api/v1/us/ios-apps/top-free/all/50/explicit.json", completion: completion)
+    }
+    
+    func fetchAppGroup(urlString: String, completion: @escaping (AppGroup?, Error?) -> Void) {
+        guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             
@@ -55,15 +71,11 @@ class AppService {
             do {
                 // success
                 let appGroup = try JSONDecoder().decode(AppGroup.self, from: data)
-//                print(appGroup.feed.results)
-                appGroup.feed.results.forEach({print($0.name)})
                 completion(appGroup, nil)
             } catch {
                 completion(nil, error)
-//                print("Failed to decode json:", jsonError)
             }
             
-        }.resume() // This fires off the request
+            }.resume() // This fires off the request
     }
-    
 }

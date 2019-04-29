@@ -26,15 +26,51 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
         fetchData()
     }
     
+    var groups = [AppGroup]()
+    
     fileprivate func fetchData() {
         print("Fetching new JSON")
+        
+        var group1: AppGroup?
+        var group2: AppGroup?
+        var group3: AppGroup?
+        
+        // To help sync your data fetches together
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
         AppService.shared.fetchGames { (appGroup, error) in
-            if let error = error {
-                print("Failed to fetch games:", error)
-                return
+            dispatchGroup.leave()
+            group1 = appGroup
+        }
+        
+        dispatchGroup.enter()
+        AppService.shared.fetchTopGrossing { (appGroup, error) in
+            dispatchGroup.leave()
+            group2 = appGroup
+        }
+        
+        dispatchGroup.enter()
+        AppService.shared.fetchTopFree { (appGroup, error) in
+            dispatchGroup.leave()
+            group3 = appGroup
+        }
+        
+        // Completion
+        dispatchGroup.notify(queue: .main) {
+            print("Completed your dispatch group tasks...")
+            if let group = group1 {
+                self.groups.append(group)
             }
             
-            print(appGroup?.feed.results)
+            if let group = group2 {
+                self.groups.append(group)
+            }
+            
+            if let group = group3 {
+                self.groups.append(group)
+            }
+            self.collectionView.reloadData()
         }
     }
     
@@ -50,11 +86,18 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return groups.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! AppsGroupCell
+        
+        let appGroup = groups[indexPath.item]
+        
+        cell.titleLabel.text = appGroup.feed.title
+        cell.horizontalController.appGroup = appGroup
+        cell.horizontalController.collectionView.reloadData()
+        
         return cell
     }
     

@@ -12,6 +12,8 @@ class AppsHorizontalController: BaseListController, UICollectionViewDelegateFlow
     
     let horizontalCellID = "horizontalCell"
     
+    var appGroup: AppGroup?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,11 +26,18 @@ class AppsHorizontalController: BaseListController, UICollectionViewDelegateFlow
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return appGroup?.feed.results.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: horizontalCellID, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: horizontalCellID, for: indexPath) as! AppRowCell
+        
+        let app = appGroup?.feed.results[indexPath.item]
+        
+        cell.nameLabel.text = app?.name
+        cell.companyLabel.text = app?.artistName
+        cell.appIconImageView.sd_setImage(with: URL(string: app?.artworkUrl100 ?? ""))
+        
         return cell
     }
     
