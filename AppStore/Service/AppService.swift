@@ -53,6 +53,7 @@ class AppService {
         
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { (data, response, error) in
+//            print(url)
             
             if let error = error {
                 completion(nil, error)
