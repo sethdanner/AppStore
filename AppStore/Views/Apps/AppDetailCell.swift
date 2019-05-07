@@ -10,9 +10,18 @@ import UIKit
 
 class AppDetailCell: UICollectionViewCell {
     
+    var app: Result! {
+        didSet {
+            nameLabel.text = app?.trackName
+            releaseNotesLabel.text = app?.releaseNotes
+            appIconImageView.sd_setImage(with: URL(string: app?.artworkUrl100 ?? ""))
+            priceButton.setTitle(app?.formattedPrice, for: .normal)
+        }
+    }
+    
     let appIconImageView = UIImageView(cornerRadius: 16)
     
-    let nameLabel = UILabel(text: "App Name", font: .boldSystemFont(ofSize: 26), numberOfLines: 2)
+    let nameLabel = UILabel(text: "App Name", font: .boldSystemFont(ofSize: 24), numberOfLines: 2)
     
     let priceButton = UIButton(title: "$4.99")
     
@@ -23,6 +32,8 @@ class AppDetailCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        backgroundColor = .lightGray
+        
         appIconImageView.backgroundColor = .red
         appIconImageView.constrainWidth(constant: 140)
         appIconImageView.constrainHeight(constant: 140)
@@ -32,14 +43,18 @@ class AppDetailCell: UICollectionViewCell {
         priceButton.layer.cornerRadius = 32 / 2
         priceButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         priceButton.setTitleColor(.white, for: .normal)
-        priceButton.constrainWidth(constant: 40)
+        priceButton.constrainWidth(constant: 80)
         
         let stackView = VerticalStackView(arrangedSubviews: [
             UIStackView(arrangedSubviews: [
                 appIconImageView,
                 VerticalStackView(arrangedSubviews: [
                     nameLabel,
-                    priceButton
+                    UIStackView(arrangedSubviews: [
+                        priceButton,
+                        UIView()
+                        ]),
+                    UIView()
                     ], spacing: 12)
                 ], customSpacing: 20),
             whatsNewLabel,
