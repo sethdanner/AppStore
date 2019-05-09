@@ -41,6 +41,16 @@ class ReviewsController: HorizontalSnappingController, UICollectionViewDelegateF
         cell.titleLabel.text = entry?.title.label
         cell.authorLabel.text = entry?.author.name.label
         cell.bodyLabel.text = entry?.content.label
+        cell.starsLabel.text = entry?.rating.label
+        
+        // Calculates how many stars to show for rating
+        for (index, view) in cell.starsStackView.arrangedSubviews.enumerated() {
+            
+            if let ratingInt = Int(entry!.rating.label) {
+                
+                view.alpha = index >= ratingInt ? 0 : 1
+            }
+        }
         
         return cell
     }
