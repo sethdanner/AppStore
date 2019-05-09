@@ -19,6 +19,7 @@
 		604222CB22848A2800CB2F1D /* ReviewRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604222CA22848A2800CB2F1D /* ReviewRowCell.swift */; };
 		604222CD22849E1400CB2F1D /* ReviewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604222CC22849E1400CB2F1D /* ReviewsController.swift */; };
 		604222CF2284A33800CB2F1D /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604222CE2284A33800CB2F1D /* ReviewCell.swift */; };
+		604222D12284B33700CB2F1D /* Reviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604222D02284B33700CB2F1D /* Reviews.swift */; };
 		609EFE412273B207004AF88A /* AppsPageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609EFE402273B207004AF88A /* AppsPageHeader.swift */; };
 		609EFE432273B5FB004AF88A /* AppsHeaderHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609EFE422273B5FB004AF88A /* AppsHeaderHorizontalController.swift */; };
 		609EFE452273BD64004AF88A /* AppsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609EFE442273BD64004AF88A /* AppsHeaderCell.swift */; };
@@ -57,6 +58,7 @@
 		604222CA22848A2800CB2F1D /* ReviewRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRowCell.swift; sourceTree = "<group>"; };
 		604222CC22849E1400CB2F1D /* ReviewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsController.swift; sourceTree = "<group>"; };
 		604222CE2284A33800CB2F1D /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		604222D02284B33700CB2F1D /* Reviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviews.swift; sourceTree = "<group>"; };
 		609EFE402273B207004AF88A /* AppsPageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsPageHeader.swift; sourceTree = "<group>"; };
 		609EFE422273B5FB004AF88A /* AppsHeaderHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsHeaderHorizontalController.swift; sourceTree = "<group>"; };
 		609EFE442273BD64004AF88A /* AppsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsHeaderCell.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				602767A92270D2BB00D61034 /* SearchResult.swift */,
+				604222D02284B33700CB2F1D /* Reviews.swift */,
 				609EFE462273D500004AF88A /* AppGroup.swift */,
 				6024ED892277808E00F7982D /* SocialApp.swift */,
 			);
@@ -411,6 +414,7 @@
 				60C6FE622282263F0089A0FD /* PreviewCell.swift in Sources */,
 				60A4916522739D010016EBAB /* Extensions.swift in Sources */,
 				60BE2AA6226F974E00E1D334 /* BaseTabBarController.swift in Sources */,
+				604222D12284B33700CB2F1D /* Reviews.swift in Sources */,
 				60BE2AA9226FAD3E00E1D334 /* AppsSearchController.swift in Sources */,
 				60CC17A12278BF0E009AC240 /* AppDetailController.swift in Sources */,
 				6024ED8C2277AF0500F7982D /* HorizontalSnappingController.swift in Sources */,
