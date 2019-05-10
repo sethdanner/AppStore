@@ -126,8 +126,7 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
         // "[weak self]" added below in handler to prevent a potential retain cycle
         cell.horizontalController.didSelectHandler = { [weak self] feedResult in
             
-            let appDetailController = AppDetailController()
-            appDetailController.appId = feedResult.id
+            let appDetailController = AppDetailController(appId: feedResult.id)
             appDetailController.navigationItem.title = feedResult.name
             self?.navigationController?.pushViewController(appDetailController, animated: true)
         }
